@@ -21,25 +21,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - name: npm install and build
-        run: |
-          npm install
-          npm run build
-      - uses: actions/upload-artifact@main
-        with:
-          name: webpack artifacts
-          path: public/
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@main
-        with:
-          name: webpack artifacts
-          path: public/
-      - name: npm test
-        run: npm test
+      - name: My joke action by Neung
+        id: joke
+        uses: nviriyadamrongkij/skills-write-javascript-actions@v2
+      
+      - run: echo "${{ steps.joke.outputs.joke }}"
+            
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: 'npm'
+      # - name: npm install and build
+      #   run: |
+      #     npm install
+      #     npm run build
+      # - uses: actions/upload-artifact@main
+      #   with:
+      #     name: webpack artifacts
+      #     path: public/
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/download-artifact@main
+  #       with:
+  #         name: webpack artifacts
+  #         path: public/
+  #     - name: npm test
+  #       run: npm test
